@@ -83,7 +83,10 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
             value = value[1:]
             df = df[df[column_name] < data_type(value)]
         else:
-            df = df[df[column_name] == data_type(value)]
+            if data_type == str:
+                df = df[df[column_name].str.contains(value)]
+            else:
+                df = df[df[column_name] == data_type(value)]
 
     # show all rows
     pd.set_option("display.max_rows", None)
