@@ -22,4 +22,5 @@ gce list --memory 128
 gce list --memory "<128"
 gce list --memory ">128"
 gce list --by memory,cpu --ascending false,true
+gce list --zone europe-west1-b --cpu ">4" --memory "<256" --by memory,cpu --ascending false,true
 ```
