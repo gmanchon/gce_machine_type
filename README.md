@@ -1,6 +1,14 @@
 
 a command to gather and list google compute engine machine types
 
+this basically only does:
+
+``` bash
+gcloud compute machine-types list
+```
+
+but is actually fast after the first occurence and the sort options work
+
 # usage
 
 ``` bash
