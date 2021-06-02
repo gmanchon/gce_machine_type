@@ -54,7 +54,7 @@ def fetch():
     help="Whether to sort ascending the list of columns (ex: false,true)")
 def list(zone, cpu, by, ascending):
     """
-    Generate challenges from provided source files and directories of solutions.
+    list gce machine types
     """
 
     print(Fore.BLUE
