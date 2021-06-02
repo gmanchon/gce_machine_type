@@ -42,6 +42,10 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
     display retrieved machine types
     """
 
+    # fetch data
+    if not os.path.isfile(data_file_path_csv):
+        fetch_machine_types()
+
     # load the data
     df = pd.read_csv(data_file_path_csv)
 
