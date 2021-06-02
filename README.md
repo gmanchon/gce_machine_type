@@ -9,6 +9,12 @@ gcloud compute machine-types list
 
 but is actually fast after the first occurence and the sort options work
 
+# install
+
+``` bash
+pip install git+https://github.com/gmanchon/gce_machine_type
+```
+
 # usage
 
 ``` bash
