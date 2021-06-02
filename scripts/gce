@@ -37,6 +37,10 @@ def fetch():
 
 @gce.command()
 @click.option(
+    "--name",
+    default=None,
+    help="Machine type name")
+@click.option(
     "--zone",
     default=None,
     help="Zone filter")
@@ -45,6 +49,10 @@ def fetch():
     default=None,
     help="CPU filter")
 @click.option(
+    "--memory",
+    default=None,
+    help="Memory in GB")
+@click.option(
     "--by",
     default=None,
     help="List of columns to sort by (ex: memory,cpu)")
@@ -52,7 +60,7 @@ def fetch():
     "--ascending",
     default=None,
     help="Whether to sort ascending the list of columns (ex: false,true)")
-def list(zone, cpu, by, ascending):
+def list(name, zone, cpu, memory, by, ascending):
     """
     list gce machine types
     """
@@ -62,7 +70,7 @@ def list(zone, cpu, by, ascending):
           + Style.RESET_ALL)
 
     # load and print data
-    list_machine_types(zone=zone, cpu=cpu, by=by, ascending=ascending)
+    list_machine_types(name=name, zone=zone, cpu=cpu, memory=memory, by=by, ascending=ascending)
 
 
 if __name__ == '__main__':

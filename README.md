@@ -5,5 +5,13 @@ a command to gather and list google compute engine machine types
 
 ``` bash
 gce fetch
-gce list --zone europe-west1-b --by memory,cpu --ascending false,true
+gce list --name n2-highcpu-16
+gce list --zone europe-west1-b
+gce list --cpu 4
+gce list --cpu "<4"
+gce list --cpu ">4"
+gce list --memory 128
+gce list --memory "<128"
+gce list --memory ">128"
+gce list --by memory,cpu --ascending false,true
 ```

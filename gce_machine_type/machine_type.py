@@ -47,9 +47,10 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
 
     # column params
     column_params = dict(
-        zone="ZONE",
-        cpu="CPUS",
-        memory="MEMORY_GB")
+        name=["NAME", str],
+        zone=["ZONE", str],
+        cpu=["CPUS", int],
+        memory=["MEMORY_GB", float])
 
     # sort params
     sort_params = dict()
@@ -57,7 +58,7 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
     # convert sort by params
     if by is not None:
         by = by.split(",")
-        by = [column_params[col] for col in by]
+        by = [column_params[col][0] for col in by]
 
     # convert sort ascending params
     if ascending is not None:
@@ -68,8 +69,21 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
     # iterate through filters
     for column, value in kwargs.items():
 
-        if value is not None:
-            df = df[df[column_params[column]] == value]
+        if value is None:
+            continue
+
+        # get column and data type
+        column_name, data_type = column_params[column]
+
+        # apply filter
+        if value[:1] == ">":
+            value = value[1:]
+            df = df[df[column_name] > data_type(value)]
+        elif value[:1] == "<":
+            value = value[1:]
+            df = df[df[column_name] < data_type(value)]
+        else:
+            df = df[df[column_name] == data_type(value)]
 
     # show all rows
     pd.set_option("display.max_rows", None)
