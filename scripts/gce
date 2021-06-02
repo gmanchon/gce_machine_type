@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from gce_machine_type.machine_type import (
+    fetch_machine_types,
+    list_machine_types
+)
+
+import click
+
+from colorama import Fore, Style
+
+
+@click.group()
+def gce():
+    pass
+
+
+@gce.command()
+def fetch():
+    """
+    fetch the list of gce machine types
+    """
+
+    # retrieve machine types
+    fetch_machine_types()
+
+    # load data
+    df = list_machine_types(verbose=False)
+
+    print(Fore.BLUE
+          + "\nGCE machine types retrieved:"
+          + Style.RESET_ALL
+          + f"\ncolumns: {', '.join(df.columns)}"
+          + f"\ncount {df.shape[1]}")
+
+
+@gce.command()
+@click.option(
+    "--zone",
+    default=None,
+    help="Zone filter")
+@click.option(
+    "--cpu",
+    default=None,
+    help="CPU filter")
+@click.option(
+    "--by",
+    default=None,
+    help="List of columns to sort by (ex: memory,cpu)")
+@click.option(
+    "--ascending",
+    default=None,
+    help="Whether to sort ascending the list of columns (ex: false,true)")
+def list(zone, cpu, by, ascending):
+    """
+    Generate challenges from provided source files and directories of solutions.
+    """
+
+    print(Fore.BLUE
+          + "\nLoaded data:"
+          + Style.RESET_ALL)
+
+    # load and print data
+    list_machine_types(zone=zone, cpu=cpu, by=by, ascending=ascending)
+
+
+if __name__ == '__main__':
+    gce()
