@@ -32,7 +32,7 @@ def fetch():
           + "\nGCE machine types retrieved:"
           + Style.RESET_ALL
           + f"\ncolumns: {', '.join(df.columns)}"
-          + f"\ncount {df.shape[1]}")
+          + f"\ncount {df.shape[0]}")
 
 
 @gce.command()
