@@ -68,7 +68,8 @@ def list_machine_types(by=None, ascending=None, verbose=True, **kwargs):
     # iterate through filters
     for column, value in kwargs.items():
 
-        df = df[df[column_params[column]] == value]
+        if value is not None:
+            df = df[df[column_params[column]] == value]
 
     # show all rows
     pd.set_option("display.max_rows", None)
