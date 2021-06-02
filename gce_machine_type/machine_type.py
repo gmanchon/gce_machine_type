@@ -37,7 +37,7 @@ def fetch_machine_types():
     df.to_csv(data_file_path_csv, index=False)
 
 
-def list_machine_types(sort_by=None, sort_ascending=None, **kwargs):
+def list_machine_types(by=None, ascending=None, **kwargs):
     """
     display retrieved machine types
     """
@@ -51,6 +51,9 @@ def list_machine_types(sort_by=None, sort_ascending=None, **kwargs):
         cpu="CPUS",
         memory="MEMORY_GB")
 
+    # convert params
+    by = [column_params[col] for col in by]
+
     # iterate through filters
     for column, value in kwargs.items():
 
@@ -60,7 +63,7 @@ def list_machine_types(sort_by=None, sort_ascending=None, **kwargs):
     # show all rows
     pd.set_option("display.max_rows", None)
 
-    print(df)
+    print(df.sort_values(by=by, ascending=ascending))
 
 
 if __name__ == '__main__':
@@ -70,5 +73,5 @@ if __name__ == '__main__':
     list_machine_types(
         zone="europe-west1-b",
         cpu=4,
-        sort_by=["memory", "cpu"],
-        sort_ascending=["desc", "asc"])
+        by=["memory", "cpu"],
+        ascending=[False, True])
